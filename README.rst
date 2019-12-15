@@ -1,5 +1,5 @@
 Package manager and build tool for C/C++
----
+----------------------------------------
 
 Inspired by Rust's Cargo package manager and build tool.
 
@@ -26,8 +26,8 @@ Package kind:
             via the script)
     - binary or configuration only (e.g. flags to link against a system
       library)
+      - precompiled binaries
 
-        - precompiled binaries
 
 Export (figured out automatically for source packages and must be explicitly
 specified for binary ones):
@@ -41,3 +41,27 @@ specified for binary ones):
 Source packages can be native and foreign. Native are those that have a known
 structure, are built and managed automatically. Foreign ones require
 launching a custom build script.
+
+Layout
+~~~~~~
+
+::
+
+  package_root
+    - pman19.toml
+    - src
+      - srcfileN.c (source files which are linked into static or dynamic lib)
+      - bin (one source file = one executable binary)
+        - srcfileM.c - executable source
+    - tests (integration tests)
+      - srcN.c (common code for tests)
+      - bin
+        - testM.c (test exec)
+
+
+
+Backend
+~~~~~~~
+
+pman19rs generates a script that is executed by CMake/Ninja/Make.
+

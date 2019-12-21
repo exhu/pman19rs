@@ -1,0 +1,41 @@
+[package]
+name = "mylib"
+version = "0.1.0"
+# default is 'static', possible: 'dynamic', 'foreign' (requires 'exports' section)
+type = "dynamic"
+# command to run the script, executed always before building packages that depend on this one:
+script_run = "python build_script.py"
+# generated toml file to merge with this one, only 'exports', 'copy' sections are supported
+script_out = "build/out_config.toml"
+
+# optional section, required for binary only foreign package
+[exports-all]
+# flags to pass to C compiler
+c_flags = "tt tt"
+# flags to pass to linker
+link_flags = "a b"
+# lib names without prefix/suffix
+link_libs = ['a', 'b']
+link_paths = ['path1', 'path2']
+[exports-win32-debug]
+link_libs = ['a_d']
+
+# section specifies which files to copy to final product, for any build tag
+[copy-all]
+assets = ['assets/icon1.png', 'assets/en.txt']
+# only if 'win32' build tag is set
+[copy-win32]
+dynamic_libs = ['libs/some_proprietary32.dll']
+
+[copy-win32-debug]
+dynamic_libs = ['libs/some_proprietary32_d.dll']
+
+# only if 'win64' tag is set
+[copy-win64]
+dynamic_libs = ['libs/some_proprietary64.dll']
+
+
+
+[dependencies-win32]
+
+win32_api = { src = "../win32_api" }

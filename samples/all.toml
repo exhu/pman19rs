@@ -4,9 +4,11 @@ version = "0.1.0"
 # default is 'static', possible: 'dynamic', 'foreign' (requires 'exports' section)
 type = "dynamic"
 # command to run the script, executed always before building packages that depend on this one:
-script_run = "python build_script.py"
+# {build_dir} is substituted with absolute path to e.g. "package_root/build/debug" directory
+script_run = "python build_script.py {build_dir}"
 # generated toml file to merge with this one, only 'exports', 'copy' sections are supported
-script_out = "build/out_config.toml"
+# required to perform copy/link phase on changes
+script_out = "{build_dir}/out_config.toml"
 
 # optional section, required for binary only foreign package
 [exports-all]
@@ -22,7 +24,7 @@ link_libs = ['a_d']
 
 # section specifies which files to copy to final product, for any build tag
 [copy-all]
-assets = ['assets/icon1.png', 'assets/en.txt']
+assets = ['assets/icon1.png', '{build_dir}/assets/en.txt']
 # only if 'win32' build tag is set
 [copy-win32]
 dynamic_libs = ['libs/some_proprietary32.dll']
@@ -39,3 +41,7 @@ dynamic_libs = ['libs/some_proprietary64.dll']
 [dependencies-win32]
 
 win32_api = { src = "../win32_api" }
+
+# section to be used in a 'script_out.toml' for generated source files
+[compile]
+sources = ['{build_dir}/out.c']

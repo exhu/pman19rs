@@ -10,6 +10,18 @@ script_run = "python build_script.py {build_dir}"
 # required to perform copy/link phase on changes
 script_out = "{build_dir}/out_config.toml"
 
+# custom compiler flags
+[build-all]
+c_flags = ""
+include_paths = [""]
+
+# for generated code
+sources = ['{build_dir}/out.c']
+
+[build-linux]
+link_libs = ["m", "pthreads"]
+link_search_paths = [""]
+
 # optional section, required for binary only foreign package
 [exports-all]
 # flags to pass to C compiler
@@ -36,12 +48,7 @@ dynamic_libs = ['libs/some_proprietary32_d.dll']
 [copy-win64]
 dynamic_libs = ['libs/some_proprietary64.dll']
 
-
-
 [dependencies-win32]
 
 win32_api = { src = "../win32_api" }
 
-# section to be used in a 'script_out.toml' for generated source files
-[compile]
-sources = ['{build_dir}/out.c']

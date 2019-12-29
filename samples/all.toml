@@ -12,7 +12,7 @@ script_out = "{build_dir}/out_config.toml"
 
 # custom compiler flags
 [build-all]
-c_flags = ""
+c_flags = [""]
 include_paths = [""]
 
 # for generated code
@@ -40,6 +40,8 @@ assets = ['assets/icon1.png', '{build_dir}/assets/en.txt']
 # only if 'win32' build tag is set
 [copy-win32]
 dynamic_libs = ['libs/some_proprietary32.dll']
+static_libs = ['libs/some_proprietary32.lib']
+binaries = ['bin/tool.exe', 'bin/tool.sh']
 
 [copy-win32-debug]
 dynamic_libs = ['libs/some_proprietary32_d.dll']

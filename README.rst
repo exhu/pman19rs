@@ -97,27 +97,29 @@ pman19rs generates a script that is executed by CMake/Ninja/Make.
 Roadmap
 ~~~~~~~
 
-- native package can be compiled, linked
-  - sections by tags (-all, -linux etc)
-  - 'build' section support
-  - library
-  - executables
-  - dynamic library
+::
 
-- dependencies support
-  - source path dependendcy on native package
-  - build
-  - DLL copy
+  - native package can be compiled, linked
+    - sections by tags (-all, -linux etc)
+    - 'build' section support
+    - library
+    - executables
+    - dynamic library
 
-- 'exports' section support to propagate linker and compiler flags
+  - dependencies support
+    - source path dependendcy on native package
+    - build
+    - DLL copy
 
-- foreign package support with only 'exports' section
+  - 'exports' section support to propagate linker and compiler flags
 
-- copying support ('copy' section)
-  - assets
-  - foreign DLLs
+  - foreign package support with only 'exports' section
 
-- build script support
-  - script invocation and error handling
-  - merging generated toml with package root toml
+  - copying support ('copy' section)
+    - assets
+    - foreign DLLs
+
+  - build script support
+    - script invocation and error handling
+    - merging generated toml with package root toml
 

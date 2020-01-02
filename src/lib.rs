@@ -8,52 +8,21 @@ mod tests {
 
 pub mod pman19rs {
     use serde::Deserialize;
-    use std::collections::{BTreeMap, BTreeSet};
-    use std::cmp::{Ord, Ordering};
 
-    #[derive(Eq)]
+    #[derive(Debug, Deserialize)]
     pub struct Tags {
-        tags: BTreeSet<String>
+        pub tags: Vec<String>
     }
 
-    impl Tags {
-        fn new(tag_line: String) -> Tags {
-            let mut tags = Tags { tags: BTreeSet::new() };
-            // TODO parse tag line
-            return tags
-        }
+    #[derive(Debug, Deserialize)]
+    pub struct TaggedData<D> {
+        pub tags: Tags,
+        pub data: D,
     }
 
-    impl Ord for Tags {
-        fn cmp(&self, other: &Self) -> Ordering {
-            self.tags.cmp(&other.tags)
-        }
-    }
-
-    impl PartialOrd for Tags {
-        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-            Some(self.cmp(other))
-        }
-    }
-    
-    impl PartialEq for Tags {
-        fn eq(&self, other: &Self) -> bool {
-            self.tags == other.tags
-        }
-    }
-    
-    pub struct TagsToData<D> {
-        data_map: BTreeMap<Tags, D>
-    }
-
-    impl<D> TagsToData<D> {
-        pub fn new() -> TagsToData<D> {
-            TagsToData::<D>{ data_map: BTreeMap::new() }
-        }
-
-        pub fn put_object_for_tags(&mut self, o: D, tags: Tags) {
-            self.data_map.insert(tags, o);
-        }
+    #[derive(Debug, Deserialize)]
+    pub struct TaggedItems<D> {
+        pub items: Vec<TaggedData<D>>
     }
 
     // native compiler and linker flags, 'exports' section
@@ -65,9 +34,9 @@ pub mod pman19rs {
 
     #[derive(Debug, Deserialize)]
     pub enum PackageKind {
-        Static { flags: BuildFlags },
-        Dynamic { flags: BuildFlags },
-        Foreign { flags: ForeignFlags },
+        Static { flags: TaggedItems<BuildFlags> },
+        Dynamic { flags: TaggedItems<BuildFlags> },
+        Foreign { flags: TaggedItems<ForeignFlags> },
     }
 
     // 'build' section
@@ -94,6 +63,7 @@ pub mod pman19rs {
     pub struct PackageRoot {
         pub name: String,
         pub kind: PackageKind,
+        pub artifacts: TaggedItems<Artifacts>,
 
     }
 }

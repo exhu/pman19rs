@@ -18,8 +18,10 @@ mod tests {
         a.items.push(TaggedData { tags: Tags { tags: vec![String::from("abc"), String::from("efggg")] }, data: ForeignFlags::new() });
         let filtered = a.filter_items(&Tags { tags: vec![String::from("abc"), String::from("efggg")]});
         assert_eq!(filtered.items.len(), 1);
+        println!("{:#?}", filtered);
         let filtered = a.filter_items(&Tags { tags: vec![String::from("abc")]});
         assert_eq!(filtered.items.len(), 0);
+        println!("{:#?}", filtered);
     }
 }
 

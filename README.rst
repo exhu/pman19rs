@@ -1,7 +1,7 @@
 Package manager and build tool for C/C++
 ----------------------------------------
 
-Inspired by Rust's Cargo package manager and build tool.
+Inspired by Rust's Cargo package manager and build tool, and pipenv.
 
 Aim -- make building cross-platform apps less painful.
 Main usage scenario is building a cross-platform app where you may need to
@@ -92,6 +92,12 @@ Backend
 ~~~~~~~
 
 pman19rs generates a script that is executed by CMake/Ninja/Make.
+
+
+Cmake backend
+~~~~~~~~~~~~~
+
+Generates a single project for current package AND dependencies.
 
 
 Roadmap

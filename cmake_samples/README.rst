@@ -1,0 +1,1 @@
+Samples to study cmake layout, used as templates later.

@@ -6,4 +6,11 @@ add_library(single_lib::lib ALIAS single_lib)
 target_include_directories(single_lib PUBLIC include)
 
 # TODO add find_package related stuff
-# TODO add tests
+message(WARNING "processed single_lib")
+
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include(CTest)
+    if (BUILD_TESTING)
+        add_subdirectory(tests)
+    endif()
+endif()

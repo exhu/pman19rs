@@ -14,21 +14,35 @@ my_test(test2)
 
 # custom tests
 
-set(MY_CUSTOM_TESTS_LIST "")
 set(TEST_PROCS_FORWARD_LIST "")
 set(TEST_NAME_PROC_PAIRS_LIST "")
 
 macro(my_custom_test TEST_NAME)
-list(APPEND MY_CUSTOM_TESTS_LIST ${TEST_NAME})
-list(APPEND TEST_PROCS_FORWARD_LIST "void ${TEST_NAME}(void)\;")
-list(APPEND TEST_NAME_PROC_PAIRS_LIST "{\"${TEST_NAME}\", ${TEST_NAME}}")
-add_test(NAME ${TEST_NAME} COMMAND run_test ${TEST_NAME})
+    list(APPEND TEST_PROCS_FORWARD_LIST "void ${TEST_NAME}(void)\;")
+    list(APPEND TEST_NAME_PROC_PAIRS_LIST "{\"${TEST_NAME}\", ${TEST_NAME}}")
+    add_test(NAME ${TEST_NAME} COMMAND run_test ${TEST_NAME})
 endmacro()
 
-my_custom_test(ctest1)
-my_custom_test(ctest2)
+function(grab_tests OUT_TEST_NAMES_VAR)
+    # -- collect tests from sources
+    set(TEST_NAME_REGEX "[ \t]*void +(test_[a-zA-Z_0-9]+) *\\(.*\\).*")
 
-list(LENGTH MY_CUSTOM_TESTS_LIST TEST_COUNT)
+    # Read in the line containing the test proc
+    file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/run_test_t1.c"
+        OUT_TEST_NAMES REGEX ${TEST_NAME_REGEX})
+
+    list(TRANSFORM OUT_TEST_NAMES REPLACE ${TEST_NAME_REGEX} "\\1")
+
+    set(${OUT_TEST_NAMES_VAR} ${OUT_TEST_NAMES} PARENT_SCOPE)
+endfunction()
+
+grab_tests(TEST_NAMES)
+message(WARNING "test names = ${TEST_NAMES}")
+foreach(TEST_NAME ${TEST_NAMES})
+    my_custom_test(${TEST_NAME})
+endforeach()
+
+list(LENGTH TEST_NAMES TEST_COUNT)
 list(JOIN TEST_PROCS_FORWARD_LIST "\n" TEST_PROCS_FORWARD)
 list(JOIN TEST_NAME_PROC_PAIRS_LIST ",\n    " TEST_NAME_PROC_PAIRS)
 configure_file("test_list.h.in" "${CMAKE_CURRENT_BINARY_DIR}/test_list.h")
@@ -37,3 +51,6 @@ add_executable(run_test run_test.c run_test_t1.c "${CMAKE_CURRENT_BINARY_DIR}/te
 target_include_directories(run_test PRIVATE "${CMAKE_CURRENT_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}")
 target_compile_features(run_test PRIVATE c_std_99)
 target_link_libraries(run_test PRIVATE single_lib::lib)
+
+
+

@@ -2,10 +2,10 @@
 
 #include <assert.h>
 
-void ctest1() {
+void test_ctest1() {
     assert(sum(5,5) == 5+6);
 }
 
-void ctest2() {
+ void test_ctest2() {
     assert(sum(5,6) == 5+6);
 }

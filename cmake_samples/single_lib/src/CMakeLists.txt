@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
+include(GNUInstallDirs)
 project(single_lib_lib)
 
 set(PUBLIC_HEADERS ../include/single_lib/single_lib.h
@@ -20,11 +21,13 @@ target_include_directories(single_lib PUBLIC
 #    $<INSTALL_INTERFACE:include/single_lib>
 )
 
-install(TARGETS single_lib EXPORT single_lib_targets PUBLIC_HEADER DESTINATION include/single_lib)
+install(TARGETS single_lib EXPORT single_lib_targets
+    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/single_lib")
+
 install(EXPORT single_lib_targets
     FILE single_libConfig.cmake
     NAMESPACE single_lib::
-    DESTINATION lib/cmake/single_lib)
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/single_lib")
 
 # in case of dependencies we need to create manually Config file, configure it and
 # install via install(FILES)

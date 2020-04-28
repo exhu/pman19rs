@@ -3,7 +3,7 @@ project(single_lib_tests)
 
 macro(my_test TEST_NAME)
     add_executable(${TEST_NAME} ${TEST_NAME}.c)
-    target_link_libraries(${TEST_NAME} single_lib::lib)
+    target_link_libraries(${TEST_NAME} single_lib::single_lib)
     add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
 endmacro()
 
@@ -12,7 +12,7 @@ my_test(test1)
 my_test(test2)
 
 
-# custom tests
+# automatically discovered tests
 
 set(TEST_PROCS_FORWARD_LIST "")
 set(TEST_NAME_PROC_PAIRS_LIST "")
@@ -50,7 +50,4 @@ configure_file("test_list.h.in" "${CMAKE_CURRENT_BINARY_DIR}/test_list.h")
 add_executable(run_test run_test.c run_test_t1.c "${CMAKE_CURRENT_BINARY_DIR}/test_list.h")
 target_include_directories(run_test PRIVATE "${CMAKE_CURRENT_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}")
 target_compile_features(run_test PRIVATE c_std_99)
-target_link_libraries(run_test PRIVATE single_lib::lib)
-
-
-
+target_link_libraries(run_test PRIVATE single_lib::single_lib)

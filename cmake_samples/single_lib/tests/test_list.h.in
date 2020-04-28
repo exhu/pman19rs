@@ -1,0 +1,10 @@
+#pragma once
+#include "test_types.h"
+
+@TEST_PROCS_FORWARD@
+
+
+const int g_test_count = @TEST_COUNT@;
+const TestItem g_tests[@TEST_COUNT@] = {
+    @TEST_NAME_PROC_PAIRS@
+};

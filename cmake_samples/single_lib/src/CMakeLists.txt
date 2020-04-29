@@ -25,7 +25,7 @@ install(TARGETS single_lib EXPORT single_lib_targets
     PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/single_lib")
 
 install(EXPORT single_lib_targets
-    FILE single_libConfig.cmake
+    FILE single_lib-config.cmake
     NAMESPACE single_lib::
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/single_lib")
 

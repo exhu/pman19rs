@@ -49,6 +49,31 @@ Source packages can be native(src) and foreign(src-alien). Native are those that
 structure, are built and managed automatically. Foreign ones require
 launching a custom build script.
 
+
+
+Build tags
+~~~~~~~~~~
+
+Features of a build are specified via tags. Every project is configured to be
+built with a certain set of tags. Some tags are predefined, e.g. 'windows',
+'win64', 'linux', 'osx', 'android', 'debug', 'release', 'test', 'amd64',
+'arm', 'arm64'. Others are user-defined, custom.
+
+Custom tags are composite, and are prefixed with the project name, e.g.
+'mylib-with-logs', where 'mylib' is the project name and 'with-logs' is a
+project-related tag. This way one can specify a set of features for the
+dependencies.
+
+Sets of tags can be used to limit source files to be included in the build,
+switch between dependencies, e.g. use appropriate binary packages for the
+target platform or appropriate system libraries.
+
+A source file or a dependency can be limited by sets of tags,
+e.g. the sequence [{'linux', 'debug'}, {'osx', 'debug'}] means that the attached
+source files will be included in the build only if both 'linux' and 'debug' tags
+are in effect, or both 'osx' and 'debug' ones.
+
+
 Layout
 ~~~~~~
 

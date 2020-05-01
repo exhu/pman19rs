@@ -40,9 +40,9 @@ Package kind:
 
 So we have the following types of packages:
   - config-only (system)
-  - src
-  - src-alien
-  - binary-only
+  - src (configured and built with the main project)
+  - src-alien (built and installed into deps-bin before configuring the project)
+  - binary-only (unpacked to deps-bin before configuring the main project)
 
 
 Source packages can be native(src) and foreign(src-alien). Native are those that have a known

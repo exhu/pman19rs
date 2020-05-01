@@ -1,0 +1,4 @@
+# Binary only package.
+# The same as v2_src-alien.toml :)
+
+# add cmake directory with -config script, add -install.cmake script in the root.

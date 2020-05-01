@@ -1,0 +1,26 @@
+[package]
+    name = "mylib"
+    version = "0.1.0"
+
+    # declare custom tags
+    tags = ['a', 'b', 'c']
+    default_tags = ['a', 'b']
+
+[[featureset]]
+    # no tags, common featureset
+    [featureset.deps]
+    printf = "0.1"
+    math = "0.1"
+    glmath = {version = "0.1", tags = ['no-double', 'sse2']}
+
+[[featureset]]
+    tags = ['a']
+    sources = ['featurea.c']
+    deps = { console = {version = "0.1", tags = ['with-logs']} }
+
+[[featureset]]
+    tags = [['a', 'c'], ['a', 'b']]
+    sources = ['featurea.c', 'featurec.c']
+        [featureset.deps]
+        console = {version = "0.1", tags = ['with-logs']}
+        htmlreader = {version = "0.1"}

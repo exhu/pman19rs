@@ -1,0 +1,18 @@
+[package]
+name = "xlib"
+version = "0.1.0"
+type = "alien"
+
+[[featureset]]
+
+# to use module provided by this package
+# expects cmake/xlib-config.cmake file
+# adds find_package(xlib), target_link_library etc.
+
+# expects xlib-install.cmake in the root, which is executed in cmake script mode.
+# and xlib-uninstall.cmake
+
+# that cmake file must do configure, build, install commands, like
+# ['cmake', '-B', 'build', '-S', '.', '-DCMAKE_INSTALL_PREFIX', '../../deps-bin/']
+
+# CMake variable XLIB_TAGS contains tags passed to this dependency.

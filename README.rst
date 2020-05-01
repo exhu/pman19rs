@@ -21,29 +21,38 @@ Package kind:
 
     - source
         - requires build step, is rebuilt automatically per project
-        - standard (all flags and binaries are exported automatically)
-        - custom (runs a specified build script, flags, binaries are exported
-            via the script)
+          - standard (all flags and binaries are exported automatically)
+          - custom (runs a specified build script, flags, binaries are exported
+              via the script)
     - binary or configuration only (e.g. flags to link against a system
       library)
       - precompiled binaries
 
+    Example:
+      1) zlib-system -- uses system installed zlib, adds only find_package()
+    to the generated cmake project file.
+      2) zlib-src with modern cmake directives -- downloaded and put to deps-src directory,
+      used via add_subdirectory() cmake call.
+      3) zlib-src-alien -- downloaded and put to deps-src directory, built and
+      installed to deps-bin directory, added to project via find_package()
+      4) win32-sdk -- downloaded to deps-src and unpacked to deps-bin,
+        added via find_package()
 
-Export (figured out automatically for source packages and must be explicitly
-specified for binary ones):
+So we have the following types of packages:
+  - config-only (system)
+  - src
+  - src-alien
+  - binary-only
 
-    - compilation flags
-    - link flags
-    - resources to copy
-    - shared libraries to copy
-    - executable files to copy
 
-Source packages can be native and foreign. Native are those that have a known
+Source packages can be native(src) and foreign(src-alien). Native are those that have a known
 structure, are built and managed automatically. Foreign ones require
 launching a custom build script.
 
 Layout
 ~~~~~~
+
+TODO change
 
 ::
 
@@ -73,8 +82,8 @@ Layout
           - same layout ast for package_root but without 'build' directory (only package sources)
 
 
-pman19rs home directory
-~~~~~~~~~~~~~~~~~~~~~~~
+pman19rs home directory or deps-bin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 

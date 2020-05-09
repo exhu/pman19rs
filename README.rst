@@ -83,28 +83,30 @@ TODO change
 
   package_root (project root)
     - pman19.toml
+    - app
+      - srcfileN.c (one source file = one executable binary)
+    - examples
+      - srcfileN.c (one source file = one executable binary)
     - assets (static resources)
     - assets_src (recommended name for resources to process, this dir not used by the build tool)
     - src
-      - srcfileN.c (source files which are linked into static or dynamic lib)
-      - bin (one source file = one executable binary)
-        - srcfileM.c - executable source
+      - include/package_name - public header files for a library project
+      - srcfileN.c, srcFile.h (source files which are linked into static or dynamic lib)
     - tests (integration tests)
-      - srcN.c (common code for tests)
-      - bin
-        - testM.c (test exec)
+      - srcN.c, srcN.h (common code for tests)
+      - testM.c (test exec)
     - build (build artifacts, must be never put under VCS)
       - any files, common for all targets are put right here, e.g. preprocessed resources or generated code
-      - debug -- directory for debug target artifacts
-        - assets -- static + processed/generated resources
+      - cmake - generated cmake lists / cmake source directory
+      - debug -- directory for debug target artifacts / cmake binary directory
+        - assets -- copied assets per package
           - package_name
-        - bin (executable files, DLLs copied here)
-        - package_name (for dependencies as well, i.e. per package)
-          - intermediate object files, static libs
       - release -- same layout as for the 'debug'
-      - dependencies
-        - package_name
-          - same layout ast for package_root but without 'build' directory (only package sources)
+
+    - dep-src -- fetched packages
+      - package_name
+        - same layout ast for package_root but without 'build' directory (only package sources)
+    - dep-bin -- installed alien packages
 
 
 pman19rs home directory or deps-bin

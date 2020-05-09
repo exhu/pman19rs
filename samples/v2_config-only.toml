@@ -3,8 +3,8 @@ name = "somelib"
 version = "0.1.0"
 type = "config-only"
 
-# deps-src/cmake is added to CMAKE_MODULE_PATH
-# adds find_package(), finds somelib-config.cmake and exports target
+# deps-src/somelib/cmake is added to CMAKE_MODULE_PATH
+# The generated CMakeLists.txt contains find_package(), finds somelib-config.cmake and exports target
 # adds target_link_library() with somelib::lib alias.
 # dependency tags are passed via SOMELIB_TAGS
 

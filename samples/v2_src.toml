@@ -1,12 +1,15 @@
 [package]
     name = "mylib"
     version = "0.1.0"
+    is_library = true
 
     # declare custom tags
     tags = ['a', 'b', 'c']
     default_tags = ['a', 'b']
-    # custom cmake module to include in the end of the root cmake lists
+    # custom cmake module to include in the end of the generated CMakeLists.txt
     include_cmake = "cmake/generate_resources.cmake"
+
+    # add_directory() is used in the generated CMakeLists.txt 
 
 [[featureset]]
     # no tags, common featureset

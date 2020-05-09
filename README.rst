@@ -77,8 +77,6 @@ are in effect, or both 'osx' and 'debug' ones.
 Layout
 ~~~~~~
 
-TODO change
-
 ::
 
   package_root (project root)
@@ -107,7 +105,7 @@ TODO change
     - dep-src -- fetched packages
       - package_name
         - same layout ast for package_root but without 'build' directory (only package sources)
-    - dep-bin -- installed alien packages
+    - dep-bin -- installed alien packages, or tools
 
 
 pman19rs home directory or deps-bin
@@ -116,19 +114,18 @@ pman19rs home directory or deps-bin
 ::
 
   home/pman19rs
-    - assets
-      - package_name (per installed package)
+    - share/package_name/assets
     - bin
       - pman19rs executable
       - installed packages executables and DLLs
-    - installed
-        - package_name.toml - lists source and version info
+    - share/pman19rs/
+        - installed.toml - lists source and version info per installed package
 
 
 Backend
 ~~~~~~~
 
-pman19rs generates a script that is executed by CMake/Ninja/Make.
+pman19rs generates a script that is executed by CMake.
 
 
 Cmake backend

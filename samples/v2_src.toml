@@ -5,6 +5,8 @@
     # declare custom tags
     tags = ['a', 'b', 'c']
     default_tags = ['a', 'b']
+    # custom cmake module to include in the end of the root cmake lists
+    include_cmake = "cmake/generate_resources.cmake"
 
 [[featureset]]
     # no tags, common featureset

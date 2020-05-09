@@ -85,6 +85,7 @@ TODO change
     - pman19.toml
     - app
       - srcfileN.c (one source file = one executable binary)
+    - cmake - custom cmake files
     - examples
       - srcfileN.c (one source file = one executable binary)
     - assets (static resources)

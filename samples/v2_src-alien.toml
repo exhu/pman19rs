@@ -3,8 +3,6 @@ name = "xlib"
 version = "0.1.0"
 type = "alien"
 
-[[featureset]]
-
 # expects deps-bin/lib/cmake/xlib/xlib-config.cmake file, which must export alias target
 
 # expects xlib-install.cmake in the root, which is executed in cmake script mode.

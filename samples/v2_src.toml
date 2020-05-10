@@ -5,27 +5,59 @@
 
     # declare custom tags
     tags = ['a', 'b', 'c']
+
+    # default build configuration
     default_tags = ['a', 'b']
+
     # custom cmake module to include in the end of the generated CMakeLists.txt
     include_cmake = "cmake/generate_resources.cmake"
 
-    # add_directory() is used in the generated CMakeLists.txt 
+[[src]]
+    # no tags, common sources
+    sources = ['common1.c', 'utils.c']
 
-[[featureset]]
+[[src]]
+    tags = ['a']
+    sources = ['featurea.c']
+
+[[src]]
+    tags = ['b']
+    sources = ['featureb.c']
+
+[[src]]
+    # used either when both 'a' and 'b' tags are set, or both 'a' and 'c'
+    tags = [['a', 'b'], ['a', 'c']]
+    sources = ['featurea.c', 'featurec.c']
+
+# packages, required by this one:
+[[deps]]
     # no tags, common featureset
-    [featureset.deps]
+    [deps.packages]
     printf = "0.1"
     math = "0.1"
     glmath = {version = "0.1", tags = ['no-double', 'sse2']}
 
-[[featureset]]
+[[deps]]
     tags = ['a']
-    sources = ['featurea.c']
-    deps = { console = {version = "0.1", tags = ['with-logs']} }
+    packages = { console = {version = "0.1", tags = ['with-logs']} }
 
-[[featureset]]
+[[deps]]
     tags = [['a', 'c'], ['a', 'b']]
-    sources = ['featurea.c', 'featurec.c']
-        [featureset.deps]
+    [deps.packages]
         console = {version = "0.1", tags = ['with-logs']}
         htmlreader = {version = "0.1"}
+
+# compiler options:
+[[opts]]
+    tags = ['a']
+
+    # pass -DV2_ENABLE_A=1 option to the compiler
+    defines = ["V2_ENABLE_A=1"]
+
+    # pass -lm
+    link_libs = ['m']
+
+[[opts]]
+    tags = ['release']
+    # optimize for size rather than speed
+    opt_size = true

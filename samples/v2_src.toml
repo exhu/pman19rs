@@ -14,7 +14,16 @@
 
 [[src]]
     # no tags, common sources
+
+    # if sources key is not specified, all .c/.h files from app/examples/src dirs
+    # are added recursively during the configuration step except for files
+    # explicitly mentioned under tags.
+
+    # add only the following files by default:
     sources = ['common1.c', 'utils.c']
+
+    # do not add any sources from app/examples/src dirs
+    # sources = []
 
 [[src]]
     tags = ['a']

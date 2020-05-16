@@ -133,6 +133,9 @@ Cmake backend
 
 Generates a single project for current package AND dependencies.
 
+There's a 'configure' step, which generates cmake files and build system files,
+and optional 'build', 'install' steps. 
+
 
 Roadmap
 ~~~~~~~

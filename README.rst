@@ -95,11 +95,11 @@ Layout
       - srcN.c, srcN.h (common code for tests)
       - testM.c (test exec)
     - build (build artifacts, must be never put under VCS)
-      - any files, common for all targets are put right here, e.g. preprocessed resources or generated code
-      - cmake - generated cmake lists / cmake source directory
       - debug -- directory for debug target artifacts / cmake binary directory
-        - assets -- copied assets per package
-          - package_name
+        - cmake_src - generated cmake lists / cmake source directory
+          - assets -- copied assets per package
+            - package_name
+        - cmake_out -- cmake binary dir, produced binaries
       - release -- same layout as for the 'debug'
 
     - dep-src -- fetched packages

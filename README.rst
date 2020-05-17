@@ -106,6 +106,10 @@ Layout
       - package_name
         - same layout ast for package_root but without 'build' directory (only package sources)
     - dep-bin -- installed alien packages, or tools
+      - [os_arch] - directory tree per cross arch., 'host' is the default name (runnable on build machine).
+        - bin
+        - include
+        - lib
 
 
 pman19rs home directory or deps-bin

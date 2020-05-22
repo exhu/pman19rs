@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use crate::pman19rs::{Tags, ForeignFlags, TaggedItems, TaggedData};
+    use crate::pman19rsold::{Tags, ForeignFlags, TaggedItems, TaggedData};
     #[test]
     fn tags_contained_in() {
         let a = Tags {tags: vec![String::from("ab"), String::from("cd")]};
@@ -25,7 +25,7 @@ mod tests {
     }
 }
 
-pub mod pman19rs {
+pub mod pman19rsold {
     use serde::Deserialize;
 
     #[derive(Debug, Deserialize, Clone)]
@@ -114,5 +114,18 @@ pub mod pman19rs {
         pub kind: PackageKind,
         pub artifacts: TaggedItems<Artifacts>,
 
+    }
+}
+
+
+pub mod pman19rs {
+    pub struct Tags {
+        pub tags: Vec<String>
+    }
+
+    impl Tags {
+        pub fn contained_in(&self, other: &Tags) -> bool {
+            self.tags.iter().all(|item| other.tags.contains(&item))
+        }
     }
 }

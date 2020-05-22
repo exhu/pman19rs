@@ -1,0 +1,4 @@
+# sample config file, must contain only declared values and tags
+tags = ['release', 'a']
+[values]
+VERSION="beta"

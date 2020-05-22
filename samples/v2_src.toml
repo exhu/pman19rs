@@ -12,6 +12,19 @@
     # custom cmake module to include in the end of the generated CMakeLists.txt
     include_cmake = "cmake/generate_resources.cmake"
 
+
+# values that are passed to cmake via -D
+# also generates config.h with tags and values as preprocessor decls
+[[values]]
+# no tags, so defaults values
+[values.map]
+VERSION = "dev"
+
+[[values]]
+tags = ['release']
+[values.map]
+VERSION = "prod"
+
 [[src]]
     # no tags, common sources
 

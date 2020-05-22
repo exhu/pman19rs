@@ -23,7 +23,7 @@ Package kind:
         - requires build step, is rebuilt automatically per project
           - standard (all flags and binaries are exported automatically)
           - custom (runs a specified build script, flags, binaries are exported
-              via the script)
+          via the script)
     - binary or configuration only (e.g. flags to link against a system
       library)
       - precompiled binaries
@@ -36,7 +36,7 @@ Package kind:
       3) zlib-src-alien -- downloaded and put to deps-src directory, built and
       installed to deps-bin directory, added to project via find_package()
       4) win32-sdk -- downloaded to deps-src and unpacked to deps-bin,
-        added via find_package()
+      added via find_package()
 
 So we have the following types of packages:
   - config-only (system)
@@ -139,6 +139,10 @@ Generates a single project for current package AND dependencies.
 
 There's a 'configure' step, which generates cmake files and build system files,
 and optional 'build', 'install' steps. 
+
+The configuration step uses a provided toml config files with tags and values.
+This file is copied to the binary directory for reference or generated based on
+passed command line arguments, so that repeated commands produce the same binary.
 
 
 Roadmap

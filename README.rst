@@ -1,6 +1,8 @@
 Package manager and build tool for C/C++
 ----------------------------------------
 
+Lost interest in implementing this idea. See meson, xmake, cmake alternatives.
+
 Inspired by Rust's Cargo package manager and build tool, and pipenv.
 
 Aim -- make building cross-platform apps less painful.
